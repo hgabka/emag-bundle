@@ -8,9 +8,10 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Hgabka\EmagBundle\Helper;
+namespace Hgabka\EmagBundle\Repository;
 
-interface EmagProductInterface
+use Doctrine\ORM\EntityRepository;
+
+class EmagPropertyRepository extends EntityRepository
 {
-    public function getEmagData();
 }
