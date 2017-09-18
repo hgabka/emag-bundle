@@ -1,0 +1,7 @@
+parameters:
+    hgabka_emag.emag_connector.class: 'Hgabka\EmagBundle\Helper\Connector'
+
+services:
+    hgabka_emag.emag_connector:
+        class: '%hgabka_emag.emag_connector.class%'
+        arguments: ['']

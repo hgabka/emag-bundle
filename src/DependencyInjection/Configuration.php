@@ -1,0 +1,36 @@
+<?php
+
+namespace Hgabka\EmagBundle\DependencyInjection;
+
+use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+
+/**
+ * This is the class that validates and merges configuration from your app/config files.
+ *
+ * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class}
+ */
+class Configuration implements ConfigurationInterface
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function getConfigTreeBuilder()
+    {
+        $treeBuilder = new TreeBuilder();
+        $rootNode = $treeBuilder->root('hgabka_emag');
+
+        $rootNode
+		    ->addDefaultsIfNotSet()
+            ->children()
+				->scalarNode('api_url')->isRequired()->cannotBeEmpty()->defaultValue('https://marketplace.emag.hu/api-3')->end()
+				->scalarNode('api_username')->isRequired()->cannotBeEmpty()->end()
+				->scalarNode('api_usercode')->isRequired()->cannotBeEmpty()->end()
+				->scalarNode('api_password')->isRequired()->cannotBeEmpty()->end()
+            ->end()
+        ;
+
+        return $treeBuilder;
+    }
+}
