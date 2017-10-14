@@ -9,13 +9,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * EmagCategory.
  *
- * @ORM\Entity(repositoryClass="Hgabka\EmagBundle\Repository\EmagPCategoryRepository")
+ * @ORM\Entity(repositoryClass="Hgabka\EmagBundle\Repository\EmagCategoryRepository")
  * @ORM\Table(name="hg_emag_emag_category")
  */
 class EmagCategory
 {
     /**
-     * @var ArrayCollection|EmaagProperty[]
+     * @var ArrayCollection|EmagProperty[]
      *
      * @ORM\OneToMany(targetEntity="Hgabka\EmagBundle\Entity\EmagProperty", cascade={"all"}, mappedBy="category", orphanRemoval=true)
      *
