@@ -5,3 +5,5 @@ services:
     hgabka_emag.emag_connector:
         class: '%hgabka_emag.emag_connector.class%'
         arguments: ['']
+
+    Hgabka\EmagBundle\Helper\Connector: "@hgabka_emag.emag_connector"
