@@ -21,9 +21,9 @@ class Connector
      *
      * @param $config
      */
-    protected function __construct($config)
+    public function __construct($config)
     {
-        $this->url = $config['app_emag_api_url'];
+        $this->url = $config['api_url'];
         $this->username = $config['api_username'];
         $this->password = $config['api_password'];
         $this->usercode = $config['api_usercode'];
