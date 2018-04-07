@@ -37,20 +37,26 @@ class Connector
      */
     public function callApi($data, $url)
     {
-        $hash = sha1(http_build_query($data).sha1($this->password));
+ /*       $hash = sha1(http_build_query($data).sha1($this->password));
         $requestData = [
             'code' => $this->usercode,
             'username' => $this->username,
             'data' => $data,
             'hash' => $hash,
         ];
+ */
+        $hash = base64_encode($this->username . ':' . $this->password);
+        $headers = array(
+            'Authorization: Basic ' . $hash
+        );
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->url.$url);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        //curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 0);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($requestData));
 
         return json_decode(curl_exec($ch), true);
