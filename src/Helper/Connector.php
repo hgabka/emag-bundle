@@ -37,18 +37,18 @@ class Connector
      */
     public function callApi($data, $url)
     {
- /*       $hash = sha1(http_build_query($data).sha1($this->password));
-        $requestData = [
-            'code' => $this->usercode,
-            'username' => $this->username,
-            'data' => $data,
-            'hash' => $hash,
+        /*       $hash = sha1(http_build_query($data).sha1($this->password));
+               $requestData = [
+                   'code' => $this->usercode,
+                   'username' => $this->username,
+                   'data' => $data,
+                   'hash' => $hash,
+               ];
+        */
+        $hash = base64_encode($this->username.':'.$this->password);
+        $headers = [
+            'Authorization: Basic '.$hash,
         ];
- */
-        $hash = base64_encode($this->username . ':' . $this->password);
-        $headers = array(
-            'Authorization: Basic ' . $hash
-        );
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->url.$url);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -57,7 +57,7 @@ class Connector
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array('data' => $data)));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(['data' => $data]));
 
         return json_decode(curl_exec($ch), true);
     }
