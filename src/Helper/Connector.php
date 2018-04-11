@@ -69,7 +69,18 @@ class Connector
      */
     public function sendProduct(EmagProductInterface $product)
     {
-        return $this->callApi($product->getEmagData(), '/product_offer/save');
+        return $this->sendProductData($product->getEmagData());
+    }
+
+
+    /**
+     * @param EmagProductInterface $product
+     *
+     * @return mixed
+     */
+    public function sendProductData(array $data)
+    {
+        return $this->callApi($data, '/product_offer/save');
     }
 
     /**
