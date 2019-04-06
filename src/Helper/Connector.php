@@ -69,7 +69,9 @@ class Connector
      */
     public function sendProduct(EmagProductInterface $product)
     {
-        return $this->sendProductData($product->getEmagData());
+        $data = $product->getEmagData();
+
+        return empty($data) ? null : $this->sendProductData($data);
     }
 
 
